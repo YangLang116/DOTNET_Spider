@@ -228,15 +228,27 @@ namespace NetSpider
             }
             //开始配置爬虫
             SpiderNodeFilter spiderNodeFilter = new SpiderNodeFilter(rules);
-            SpiderManager spiderManager = new SpiderManager(htmlContent, spiderNodeFilter);
-            List<String> results = spiderManager.start(needInfo);
-            foreach(String content in results)
-            {
-                Console.WriteLine(content);
-            }
+            SpiderManager spiderManager = new SpiderManager(htmlContent, spiderNodeFilter, needInfo);
+            //List<String> results = spiderManager.start();
+            addItemIntoListView(rules, needInfo);
         }
 
-       
+        private void addItemIntoListView(Dictionary<String, String> rules, String content)
+        {
+            //实例化创建对象item  
+            ListViewItem item = new ListViewItem();
+            //向listView控件的项中添加第一个元素ID 
+            int count = filter_listview.Items.Count;
+            item = filter_listview.Items.Add((count + 1) + "");
+            String ruleStr = null;
+            foreach (var it in rules)
+            {
+                ruleStr += (it.Key + "=" + it.Value + " & ");
+            }
+            item.SubItems.Add(ruleStr.Substring(0, ruleStr.Length - 3));
+            item.SubItems.Add(content);
+        }
+
     }
        
 }

@@ -7,4 +7,3 @@ D:\C#WorkSpace\NetSpider\NetSpider\obj\Debug\NetSpider.exe
 D:\C#WorkSpace\NetSpider\NetSpider\obj\Debug\NetSpider.pdb
 D:\C#WorkSpace\NetSpider\NetSpider\obj\Debug\NetSpider.MainForm.resources
 D:\C#WorkSpace\NetSpider\NetSpider\bin\Debug\Winista.HtmlParser.dll
-D:\C#WorkSpace\NetSpider\NetSpider\obj\Debug\NetSpider.csprojResolveAssemblyReference.cache

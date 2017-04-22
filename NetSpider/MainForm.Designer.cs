@@ -1,4 +1,6 @@
-﻿namespace NetSpider
+﻿using System.Windows.Forms;
+
+namespace NetSpider
 {
     partial class MainForm
     {
@@ -44,9 +46,12 @@
             this.result_text = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.filter_listview = new System.Windows.Forms.ListView();
             this.startBtn = new System.Windows.Forms.Button();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.filter_groupbox.SuspendLayout();
             this.result_groupbox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -202,7 +207,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.listView1);
+            this.groupBox1.Controls.Add(this.filter_listview);
             this.groupBox1.Location = new System.Drawing.Point(662, 413);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(482, 320);
@@ -210,15 +215,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "页面解析规则生成列表";
             // 
-            // listView1
+            // filter_listview
             // 
-            this.listView1.BackColor = System.Drawing.SystemColors.Control;
-            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listView1.Location = new System.Drawing.Point(0, 37);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(482, 277);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.filter_listview.BackColor = System.Drawing.SystemColors.Control;
+            this.filter_listview.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.filter_listview.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.filter_listview.FullRowSelect = true;
+            this.filter_listview.Location = new System.Drawing.Point(6, 37);
+            this.filter_listview.Name = "filter_listview";
+            this.filter_listview.Size = new System.Drawing.Size(470, 277);
+            this.filter_listview.TabIndex = 0;
+            this.filter_listview.UseCompatibleStateImageBehavior = false;
+            this.filter_listview.View = System.Windows.Forms.View.Details;
             // 
             // startBtn
             // 
@@ -237,6 +248,22 @@
             this.webBrowser.Size = new System.Drawing.Size(20, 20);
             this.webBrowser.TabIndex = 9;
             this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_DocumentCompleted);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "序号";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "规则";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader2.Width = 280;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "内容";
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader3.Width = 150;
             // 
             // MainForm
             // 
@@ -283,11 +310,14 @@
         private System.Windows.Forms.GroupBox result_groupbox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView filter_listview;
         private System.Windows.Forms.Button startBtn;
         private System.Windows.Forms.RadioButton result_href;
         private System.Windows.Forms.RadioButton result_text;
         private System.Windows.Forms.WebBrowser webBrowser;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
     }
 }
 

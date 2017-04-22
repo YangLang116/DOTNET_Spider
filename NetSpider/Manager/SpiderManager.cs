@@ -11,16 +11,18 @@ namespace NetSpider.Manager
 {
     class SpiderManager
     {
+        private String needValue;
         private String htmlContent;
         private SpiderNodeFilter nodefilter;
 
-        public SpiderManager(String htmlContent, SpiderNodeFilter nodefilter)
+        public SpiderManager(String htmlContent, SpiderNodeFilter nodefilter,String needValue)
         {
             this.htmlContent = htmlContent;
             this.nodefilter = nodefilter;
+            this.needValue = needValue;
         }
 
-        public List<String> start(String needbykey)
+        public List<String> start()
         {
             Parser parser = new Parser();
             parser.InputHTML = htmlContent;
@@ -33,9 +35,9 @@ namespace NetSpider.Manager
                 if(node is INode)
                 {
                     ITag tag = node as ITag;
-                    if(needbykey == "href")
+                    if(needValue == "href")
                     {
-                        results.Add(tag.GetAttribute(needbykey));
+                        results.Add(tag.GetAttribute(needValue));
                     }
                     else
                     {
