@@ -128,7 +128,7 @@ namespace NetSpider
 
         private void NodeItemSelectListener(object sender, EventArgs e)
         {
-            //情况之前选择的信息
+            //清空选择节点过滤器的信息
             filter_id.Checked = false;
             filter_class.Checked = false;
             filter_name.Checked = false;
@@ -154,6 +154,7 @@ namespace NetSpider
                     String[] keyValue = Regex.Split(contentAttrPair, "=");
                     String key = keyValue[0].Trim();
                     String value = keyValue[1].Substring(1, keyValue[1].Length - 2);
+                    //绑定显示
                     switch (key)
                     {
                         case "id":
@@ -172,9 +173,7 @@ namespace NetSpider
                             break;
                     }
                 }
-               
             }
-              
         }
     }
         #endregion
