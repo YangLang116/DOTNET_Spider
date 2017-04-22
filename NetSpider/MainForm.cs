@@ -1,4 +1,6 @@
-﻿using NetSpider.Utils;
+﻿using NetSpider.Bean;
+using NetSpider.Manager;
+using NetSpider.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,14 +20,12 @@ namespace NetSpider
 {
     public partial class MainForm : Form
     {
+
+        private String htmlContent;
+
         public MainForm()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void HtmlAnalysisBtn_Click(object sender, EventArgs e)
@@ -38,7 +38,7 @@ namespace NetSpider
             Console.WriteLine("当前输入的是网址是：" + htmlUrl);
             if(htmlUrl.StartsWith("http://") || htmlUrl.StartsWith("https://"))
             {
-                NetDownLoaderUtils.downloaderHtml(htmlUrl, new System.Net.DownloadStringCompletedEventHandler(onHtmlDownLoaderComplete));
+                webBrowser.Url = new Uri(htmlUrl);
             }
             else
             {
@@ -48,14 +48,15 @@ namespace NetSpider
         }
 
         /// <summary>
-        /// html页面下载完毕的回调
+        /// html页面加载完毕的回调
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void onHtmlDownLoaderComplete(object sender, DownloadStringCompletedEventArgs e)
+        private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            htmlContent = webBrowser.DocumentText;
             //开始TreeView的展示
-            Lexer lexer = new Lexer(e.Result);
+            Lexer lexer = new Lexer(htmlContent);
             Parser parser = new Parser(lexer);
             NodeList htmlNodes = parser.Parse(null);
             this.HtmlTreeView.Nodes.Clear();
@@ -65,7 +66,6 @@ namespace NetSpider
             {
                 this.RecursionHtmlNode(treeRoot, htmlNodes[i], false);
             }
-
         }
 
         #region 将Html内容绑定到TreeView上
@@ -125,6 +125,7 @@ namespace NetSpider
                 }
             }
         }
+        #endregion
 
         private void NodeItemSelectListener(object sender, EventArgs e)
         {
@@ -175,6 +176,67 @@ namespace NetSpider
                 }
             }
         }
+
+        /// <summary>
+        /// 当添加添加时添加一个提取规则
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addFilterBtn_click(object sender, EventArgs e)
+        {
+            if(htmlContent == null || htmlContent == "")
+            {
+                return;
+            }
+            Dictionary<String, String> rules = null;
+            if (filter_id.Checked && filter_id_input.Text != "")
+            {
+                if(rules == null)
+                {
+                    rules = new Dictionary<string, string>();
+                }
+                rules.Add("id", filter_id_input.Text);
+            }
+            if (filter_class.Checked && filter_class_input.Text != "")
+            {
+                if (rules == null)
+                {
+                    rules = new Dictionary<string, string>();
+                }
+                rules.Add("class", filter_class_input.Text);
+            }
+            if (filter_name.Checked && filter_name_input.Text != "")
+            {
+                if (rules == null)
+                {
+                    rules = new Dictionary<string, string>();
+                }
+                rules.Add("name", filter_name_input.Text);
+            }
+            if(rules == null)
+            {
+                return;
+            }
+            String needInfo = null;
+            if (result_text.Checked)
+            {
+                needInfo = "text";
+            }
+            else
+            {
+                needInfo = "href";
+            }
+            //开始配置爬虫
+            SpiderNodeFilter spiderNodeFilter = new SpiderNodeFilter(rules);
+            SpiderManager spiderManager = new SpiderManager(htmlContent, spiderNodeFilter);
+            List<String> results = spiderManager.start(needInfo);
+            foreach(String content in results)
+            {
+                Console.WriteLine(content);
+            }
+        }
+
+       
     }
-        #endregion
+       
 }

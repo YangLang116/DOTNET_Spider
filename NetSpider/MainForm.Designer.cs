@@ -40,12 +40,13 @@
             this.filter_id_input = new System.Windows.Forms.TextBox();
             this.filter_id = new System.Windows.Forms.CheckBox();
             this.result_groupbox = new System.Windows.Forms.GroupBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.result_text = new System.Windows.Forms.CheckBox();
+            this.result_href = new System.Windows.Forms.RadioButton();
+            this.result_text = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.startBtn = new System.Windows.Forms.Button();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.filter_groupbox.SuspendLayout();
             this.result_groupbox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -84,7 +85,7 @@
             this.HtmlTreeView.BackColor = System.Drawing.SystemColors.Control;
             this.HtmlTreeView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.HtmlTreeView.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.HtmlTreeView.Location = new System.Drawing.Point(27, 82);
+            this.HtmlTreeView.Location = new System.Drawing.Point(27, 86);
             this.HtmlTreeView.Name = "HtmlTreeView";
             this.HtmlTreeView.Size = new System.Drawing.Size(593, 727);
             this.HtmlTreeView.TabIndex = 3;
@@ -158,7 +159,7 @@
             // 
             // result_groupbox
             // 
-            this.result_groupbox.Controls.Add(this.checkBox2);
+            this.result_groupbox.Controls.Add(this.result_href);
             this.result_groupbox.Controls.Add(this.result_text);
             this.result_groupbox.Location = new System.Drawing.Point(651, 264);
             this.result_groupbox.Name = "result_groupbox";
@@ -167,23 +168,25 @@
             this.result_groupbox.TabStop = false;
             this.result_groupbox.Text = "标签提取内容";
             // 
-            // checkBox2
+            // result_href
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(295, 38);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(120, 16);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "图片资源（Href）";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.result_href.AutoSize = true;
+            this.result_href.Location = new System.Drawing.Point(246, 37);
+            this.result_href.Name = "result_href";
+            this.result_href.Size = new System.Drawing.Size(119, 16);
+            this.result_href.TabIndex = 10;
+            this.result_href.Text = "图片资源（href）";
+            this.result_href.UseVisualStyleBackColor = true;
             // 
             // result_text
             // 
             this.result_text.AutoSize = true;
-            this.result_text.Location = new System.Drawing.Point(104, 38);
+            this.result_text.Checked = true;
+            this.result_text.Location = new System.Drawing.Point(47, 37);
             this.result_text.Name = "result_text";
-            this.result_text.Size = new System.Drawing.Size(132, 16);
-            this.result_text.TabIndex = 0;
+            this.result_text.Size = new System.Drawing.Size(131, 16);
+            this.result_text.TabIndex = 9;
+            this.result_text.TabStop = true;
             this.result_text.Text = "标签内文字（Text）";
             this.result_text.UseVisualStyleBackColor = true;
             // 
@@ -195,6 +198,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "添加";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.addFilterBtn_click);
             // 
             // groupBox1
             // 
@@ -225,6 +229,15 @@
             this.startBtn.Text = "开始提取";
             this.startBtn.UseVisualStyleBackColor = true;
             // 
+            // webBrowser
+            // 
+            this.webBrowser.Location = new System.Drawing.Point(27, 86);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(20, 20);
+            this.webBrowser.TabIndex = 9;
+            this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_DocumentCompleted);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -239,11 +252,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.HtmlAnalysisBtn);
             this.Controls.Add(this.HtmlInputView);
+            this.Controls.Add(this.webBrowser);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "万能网页爬虫器";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.filter_groupbox.ResumeLayout(false);
             this.filter_groupbox.PerformLayout();
             this.result_groupbox.ResumeLayout(false);
@@ -268,12 +281,13 @@
         private System.Windows.Forms.TextBox filter_id_input;
         private System.Windows.Forms.CheckBox filter_id;
         private System.Windows.Forms.GroupBox result_groupbox;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox result_text;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button startBtn;
+        private System.Windows.Forms.RadioButton result_href;
+        private System.Windows.Forms.RadioButton result_text;
+        private System.Windows.Forms.WebBrowser webBrowser;
     }
 }
 
