@@ -1,4 +1,6 @@
 ﻿using NetSpider.Bean;
+using NetSpider.Controller;
+using NetSpider.Filter;
 using NetSpider.Manager;
 using NetSpider.Utils;
 using System;
@@ -188,6 +190,19 @@ namespace NetSpider
             {
                 return;
             }
+
+            SpiderManagerController managerController = SpiderManagerController.getInstance();
+            if (filter_href.Checked && filter_href_input.Text != "")
+            {
+                RegexNodeFilter imgeNodeFilter = new RegexNodeFilter("href", filter_href_input.Text);
+                SpiderManager imgspiderManager = new SpiderManager(imgeNodeFilter, "href");
+                managerController.inputManager(imgspiderManager);
+                //为了展示
+                Dictionary< string, string> tmp  = new Dictionary<string, string>();
+                tmp.Add("href", filter_href_input.Text + "...");
+                addItemIntoListView(tmp , "href");
+            }
+
             Dictionary<String, String> rules = null;
             if (filter_id.Checked && filter_id_input.Text != "")
             {
@@ -228,8 +243,8 @@ namespace NetSpider
             }
             //开始配置爬虫
             SpiderNodeFilter spiderNodeFilter = new SpiderNodeFilter(rules);
-            SpiderManager spiderManager = new SpiderManager(htmlContent, spiderNodeFilter, needInfo);
-            //List<String> results = spiderManager.start();
+            SpiderManager spiderManager = new SpiderManager(spiderNodeFilter, needInfo);
+            managerController.inputManager(spiderManager);
             addItemIntoListView(rules, needInfo);
         }
 
@@ -249,6 +264,20 @@ namespace NetSpider
             item.SubItems.Add(content);
         }
 
+        private void startBtn_Click(object sender, EventArgs e)
+        {
+            //开始整体爬取
+            if(needDeepGet.Checked && needdeepget_input.Text != "")
+            {
+                RegexNodeFilter NextNodeFilter = new RegexNodeFilter("href", needdeepget_input.Text);
+                SpiderManager imgspiderManager = new SpiderManager(NextNodeFilter, "href");
+                SpiderManagerController.getInstance().inputNextManager(imgspiderManager);
+            }
+            //打开一个新窗口
+            InfoOutputForm form = new InfoOutputForm();
+            this.Hide();
+            form.Show();
+        }
     }
        
 }

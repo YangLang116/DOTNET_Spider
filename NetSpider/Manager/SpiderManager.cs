@@ -12,17 +12,15 @@ namespace NetSpider.Manager
     class SpiderManager
     {
         private String needValue;
-        private String htmlContent;
-        private SpiderNodeFilter nodefilter;
+        private NodeFilter nodefilter;
 
-        public SpiderManager(String htmlContent, SpiderNodeFilter nodefilter,String needValue)
+        public SpiderManager(NodeFilter nodefilter,String needValue)
         {
-            this.htmlContent = htmlContent;
             this.nodefilter = nodefilter;
             this.needValue = needValue;
         }
 
-        public List<String> start()
+        public List<String> start(String htmlContent)
         {
             Parser parser = new Parser();
             parser.InputHTML = htmlContent;
