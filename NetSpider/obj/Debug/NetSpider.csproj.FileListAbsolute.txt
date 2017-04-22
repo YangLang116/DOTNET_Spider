@@ -1,0 +1,9 @@
+D:\C#WorkSpace\NetSpider\NetSpider\bin\Debug\NetSpider.exe.config
+D:\C#WorkSpace\NetSpider\NetSpider\bin\Debug\NetSpider.exe
+D:\C#WorkSpace\NetSpider\NetSpider\bin\Debug\NetSpider.pdb
+D:\C#WorkSpace\NetSpider\NetSpider\obj\Debug\NetSpider.Properties.Resources.resources
+D:\C#WorkSpace\NetSpider\NetSpider\obj\Debug\NetSpider.csproj.GenerateResource.Cache
+D:\C#WorkSpace\NetSpider\NetSpider\obj\Debug\NetSpider.exe
+D:\C#WorkSpace\NetSpider\NetSpider\obj\Debug\NetSpider.pdb
+D:\C#WorkSpace\NetSpider\NetSpider\obj\Debug\NetSpider.MainForm.resources
+D:\C#WorkSpace\NetSpider\NetSpider\bin\Debug\Winista.HtmlParser.dll
